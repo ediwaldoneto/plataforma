@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
+app.get('/question', (req, res) => {
+  res.render('question');
+});
+
 app.listen(8081, () => {
   console.log('Servico em execucao');
 });
