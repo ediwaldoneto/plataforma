@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const PerguntaModel = require('./database/Pergunta');
 
 //Verificando conexao com o banco de dados
 connection
@@ -10,7 +11,7 @@ connection
     console.log('Conectado com DB');
   })
   .catch(msgError => {
-    console.log('Erro ao conectar' + msgError);
+    console.log('Erro ao conectar ' + msgError);
   });
 
 //Express usando o EJS como view engine
@@ -37,5 +38,5 @@ app.post('/send', (req, res) => {
 });
 
 app.listen(8081, () => {
-  console.log('Servico roadando na porta 8081');
+  console.log('Servico rodando na porta 8081');
 });
