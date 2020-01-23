@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
-const PerguntaModel = require('./database/Pergunta');
+const Pergunta = require('./database/Pergunta');
 
 //Verificando conexao com o banco de dados
 connection
@@ -34,7 +34,12 @@ app.get('/question', (req, res) => {
 app.post('/send', (req, res) => {
   var title = req.body.title;
   var desc = req.body.desc;
-  res.send('Resposta Recebida  Titulo ' + title + ' ' + 'Descricao ' + desc);
+  Pergunta.create({
+    titulo: title,
+    descricao: desc
+  }).then(() => {
+    res.redirect('/question');
+  });
 });
 
 app.listen(8081, () => {
