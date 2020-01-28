@@ -24,7 +24,11 @@ app.use(bodyParser.json());
 
 //Rotas
 app.get('/', (req, res) => {
-  res.render('home');
+  Pergunta.findAll({ raw: true }).then(perguntas => {
+    res.render('home', {
+      perguntas: perguntas
+    });
+  });
 });
 
 app.get('/question', (req, res) => {
@@ -38,7 +42,7 @@ app.post('/send', (req, res) => {
     titulo: title,
     descricao: desc
   }).then(() => {
-    res.redirect('/question');
+    res.redirect('/');
   });
 });
 

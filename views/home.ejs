@@ -1,6 +1,20 @@
 <%- include ('./partials/header') %>
 <body>
   <%- include ('./partials/navbar') %>
-  <h1>Test do Bootstrap</h1>
+  <div class="container">
+    <% perguntas.forEach(pergunta => { %>
+
+    <div class="card">
+      <div class="card-header">
+        <h5><%= pergunta.titulo %></h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= pergunta.descricao %></p>
+        <a href="#" class="btn btn-primary">Responder</a>
+      </div>
+    </div>
+
+    <% }) %>
+  </div>
 </body>
 <%- include ('./partials/footer') %>
