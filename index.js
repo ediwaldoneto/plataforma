@@ -8,7 +8,7 @@ const Pergunta = require('./database/Pergunta');
 connection
   .authenticate()
   .then(() => {
-    console.log('Conectado com DB');
+    // console.log('Conectado com DB');
   })
   .catch(msgError => {
     console.log('Erro ao conectar ' + msgError);
@@ -22,7 +22,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Rotas
+//Rota pagina Home
 app.get('/', (req, res) => {
   Pergunta.findAll({ raw: true, order: [['id', 'DESC']] }).then(perguntas => {
     res.render('home', {
@@ -31,10 +31,24 @@ app.get('/', (req, res) => {
   });
 });
 
+//Rota pagina de Perguntas
 app.get('/question', (req, res) => {
   res.render('question');
 });
 
+//Pesquisando pergunta por ID
+app.get('/question/:id', (req, res) => {
+  var id = req.params.id;
+  Pergunta.findOne({
+    where: { id: id }
+  }).then(pergunta => {
+    if (pergunta != undefined) {
+    } else {
+    }
+  });
+});
+
+//Rota para salvar dados da pergunta
 app.post('/send', (req, res) => {
   var title = req.body.title;
   var desc = req.body.desc;
